@@ -13,7 +13,7 @@ app.use(express.json());
 
 // mongodb 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster369.swbratv.mongodb.net/?retryWrites=true&w=majority`;
 
 
@@ -63,7 +63,7 @@ async function run() {
 
 app.post('/selected-classes',  async (req, res) => {
     const selectedClass = req.body;
-    console.log(selectedClass);
+    // console.log(selectedClass);
     const result = await selectedClassCollection.insertOne(selectedClass)
     res.send(result);
   })
@@ -81,6 +81,12 @@ app.get('/selected-classes', async (req, res) => {
 
 // Delete selected classes 
 
+app.delete('/selected-classes/:id', async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id) };
+    const result = await selectedClassCollection.deleteOne(query);
+    res.send(result);
+  })
 
 
 
