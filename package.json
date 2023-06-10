@@ -1,4 +1,8 @@
 {
+  "name": "art-server",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000b\u00007\u0000a\u00001\u00002\u0000-\u0000s\u0000u\u0000m\u0000m\u0000e\u0000r\u0000-\u0000c\u0000a\u0000m\u0000p\u0000-\u0000s\u0000e\u0000r\u0000v\u0000e\u0000r\u0000_\u0000s\u0000i\u0000d\u0000e\u0000-\u0000n\u0000a\u0000b\u0000e\u0000e\u0000l\u00003\u00006\u00005\u0000\r\u0000 \u0000",
+  "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
@@ -6,5 +10,20 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.6.0",
     "nodemon": "^2.0.22"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-nabeel365.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-nabeel365/issues"
+  },
+  "homepage": "https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-nabeel365#readme"
 }
