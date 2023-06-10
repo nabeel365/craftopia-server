@@ -70,6 +70,18 @@ app.post('/selected-classes',  async (req, res) => {
 
 
 
+//   get selected classes 
+
+app.get('/selected-classes', async (req, res) => {
+    const result = await selectedClassCollection.find().toArray();
+    res.send(result);
+});
+ 
+
+
+// Delete selected classes 
+
+
 
 
 
