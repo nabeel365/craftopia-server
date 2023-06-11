@@ -57,6 +57,16 @@ async function run() {
         });
 
 
+        // instructor added classes 
+
+        app.post('/classes',  async (req, res) => {
+            const addedClass = req.body;
+            const result = await classesCollection.insertOne(addedClass)
+            res.send(result);
+          })
+
+
+
 
 
 // post selected classes 
