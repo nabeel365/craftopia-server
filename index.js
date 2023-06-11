@@ -110,6 +110,12 @@ app.post('/users',  async (req, res) => {
   })
 
 
+//   get users 
+
+app.get('/users', async (req, res) => {
+    const result = await usersCollection.find().toArray();
+    res.send(result);
+});
 
 
 
