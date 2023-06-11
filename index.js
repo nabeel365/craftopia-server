@@ -39,6 +39,8 @@ async function run() {
         const classesCollection = client.db('classesDB').collection('classes'); 
 
         const selectedClassCollection = client.db('selectedClassesDB').collection('selected-classes');
+
+        const usersCollection = client.db('Craftopia').collection('users');
         
 
 
@@ -83,7 +85,7 @@ app.post('/selected-classes',  async (req, res) => {
 //   get selected classes 
 
 app.get('/selected-classes', async (req, res) => {
-    const result = await selectedClassCollection.find().toArray();
+    const result = await selectedClassCollection.find({email: req.query.email}).toArray();
     res.send(result);
 });
  
@@ -98,6 +100,14 @@ app.delete('/selected-classes/:id', async (req, res) => {
     res.send(result);
   })
 
+
+
+//  post users 
+app.post('/users',  async (req, res) => {
+    const user = req.body;
+    const result = await usersCollection.insertOne(user)
+    res.send(result);
+  })
 
 
 
@@ -124,5 +134,18 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Craftopia Art School is running on port ${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
