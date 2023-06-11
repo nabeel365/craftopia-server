@@ -91,6 +91,20 @@ app.get('/selected-classes', async (req, res) => {
  
 
 
+
+ // Update class status ...................
+ app.patch('/classes/:id', async (req, res) => {
+    const id = req.params.id;
+    const { status } = req.body;
+    const query = { _id: new ObjectId(id) };
+    const update = { $set: { status } };
+    const result = await classesCollection.updateOne(query, update);
+    res.send(result);
+  });
+
+
+
+
 // Delete selected classes 
 
 app.delete('/selected-classes/:id', async (req, res) => {
@@ -114,6 +128,18 @@ app.post('/users',  async (req, res) => {
 
 app.get('/users', async (req, res) => {
     const result = await usersCollection.find().toArray();
+    res.send(result);
+});
+
+
+
+// Update user role ............................
+app.put('/users/:id', async (req, res) => {
+    const id = req.params.id;
+    const { role } = req.body;
+    const query = { _id: new ObjectId(id) };
+    const update = { $set: { role } };
+    const result = await usersCollection.updateOne(query, update);
     res.send(result);
 });
 
