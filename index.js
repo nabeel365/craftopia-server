@@ -18,6 +18,7 @@ app.use(express.json());
 
 
 // mongodb 
+// const { ObjectId } = require('mongodb');
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster369.swbratv.mongodb.net/?retryWrites=true&w=majority`;
@@ -67,7 +68,26 @@ async function run() {
     });
 
 
-    // instructor added classes 
+    // price --   TOD0 LATER
+
+    // app.get('/classes/:id', async (req, res) => {
+    //   const id = req.params.id;
+    //   const result = await classesCollection.findOne({_id: new ObjectId(id)});
+    //   console.log(result);
+
+    //   res.send(result);
+    // });
+
+// Todo later
+    
+    // app.get('/selected-classes', async (req, res) => {
+    //   const result = await classesCollection.find({ id: req.query._id }).toArray();
+    //   res.send(result);
+    // });
+
+
+
+    // instructor added classes    
 
     app.post('/classes', async (req, res) => {
       const addedClass = req.body;
@@ -110,6 +130,18 @@ async function run() {
       const result = await classesCollection.updateOne(query, update);
       res.send(result);
     });
+
+// app.patch('/classesApprove/:id', async (req, res) => {
+//       const id = req.params.id;
+//       const { status } = req.body;
+//       const { feedback } = req.body;
+//       const query = { _id: new ObjectId(id) };
+//       const update = { $set: { status, feedback } };
+//       const result = await classesCollection.updateOne(query, update);
+//       res.send(result);
+//     });
+
+
 
 
 
@@ -219,7 +251,8 @@ async function run() {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: amount,
         currency: 'usd',
-        payment_method_types: ['card']
+        payment_method_types: ['card'],
+        // status : "succeeded"
       });
 
       res.send({
@@ -228,8 +261,9 @@ async function run() {
     })
 
 
+   
 
-
+    
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
