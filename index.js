@@ -68,6 +68,76 @@ async function run() {
     });
 
 
+    // update class ...
+// .................
+
+
+
+
+// ...
+
+// Update class status and seats
+// app.patch('/classes/:id', async (req, res) => {
+//   const id = req.params.id;
+//   const { status } = req.body;
+//   const { feedback } = req.body;
+//   const query = { _id: new ObjectId(id) };
+//   const update = { $set: { status, feedback } };
+  
+//   try {
+//     // Update the class status
+//     const result = await selectedClassCollection.updateOne(query, update);
+    
+//     // Fetch the course ID associated with the selected class
+//     const selectedClass = await selectedClassCollection.findOne(query);
+//     const courseId = selectedClass.courseId;
+    
+//     // Update the available seats and enrolled count for the course
+//     const courseQuery = { _id: new ObjectId(courseId) };
+//     console.log(courseQuery, selectedClass, "97");
+//     const courseUpdate = {
+//       $inc: { available_seats: selectedClass.available_seats - 1, enroled: selectedClass.enroled + 1 }
+//     };
+//     await classesCollection.updateOne(courseQuery, courseUpdate);
+    
+//     res.send(result);
+//   } catch (error) {
+//     console.error('Error updating class and seats:', error);
+//     res.status(500).send('Internal Server Error');
+
+//   }
+// });
+
+// ...
+
+
+
+
+
+
+
+
+
+
+
+
+    // ........................
+
+    app.get('/instructorclasses', async (req, res) => {
+      const email = req.query.email;
+      const result = await classesCollection.find({email: email}).toArray();
+      res.send(result);
+    });
+
+     // instructor added classes    
+
+     app.post('/classes', async (req, res) => {
+      const addedClass = req.body;
+      const result = await classesCollection.insertOne(addedClass)
+      res.send(result);
+    })
+
+
     // price --   TOD0 LATER
 
     // app.get('/classes/:id', async (req, res) => {
@@ -87,13 +157,7 @@ async function run() {
 
 
 
-    // instructor added classes    
-
-    app.post('/classes', async (req, res) => {
-      const addedClass = req.body;
-      const result = await classesCollection.insertOne(addedClass)
-      res.send(result);
-    })
+   
 
 
 
@@ -118,7 +182,7 @@ async function run() {
     });
 
 
-
+// ......................... uncommet later
 
     // Update class status ...................
     app.patch('/classes/:id', async (req, res) => {
@@ -130,6 +194,11 @@ async function run() {
       const result = await classesCollection.updateOne(query, update);
       res.send(result);
     });
+
+// .......................................
+
+
+
 
 // app.patch('/classesApprove/:id', async (req, res) => {
 //       const id = req.params.id;
@@ -234,14 +303,31 @@ async function run() {
 
     // post payment
     app.post('/payments', async (req, res) => {
-      const payment = req.body;
+      const payment = req.body.payment;
       const result = await paymentCollection.insertOne(payment);
+      console.log(payment);
       res.send(result);
     })
 
 
     // get payment
+    // app.get('/payments', async (req, res) => {
+    //   const result = await paymentCollection.find().toArray();
+    //   res.send(result);
+    // })
 
+    // get payment by email 
+    // app.get('/payments', async (req, res) => {
+    //   const email = req.query.email;       
+    //   const result = await paymentCollection.find({ email: email }).toArray();      
+    //   res.send(result);
+    // })
+    
+    app.get('/payments', async (req, res) => {
+      const email = req.query.email;
+      const result = await paymentCollection.find({ email: email }).sort({ date: -1 }).toArray();
+      res.send(result);
+    });
 
     // payments 
 
